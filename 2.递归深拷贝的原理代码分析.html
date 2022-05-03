@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 本节我们要明白递归深拷贝的原理用基础代码分析出来过程
+			// 需要深拷贝的对象
+			let obj = {
+				// 基本数类型
+				name:"性名",
+				// 数组
+				arrLisr:[1,2,3],
+				// 对象
+				addobj:{
+					age:19,
+					sex:"男"
+				},
+				// 函数
+				fun:function(){
+					console.log("函数")
+				}
+			}
+			// 递归深拷贝的原理用基础代码分析:
+			let newObj = {};
+			newObj.name = obj.name;
+			newObj.arrLisr = [];
+			newObj.arrLisr[0] = obj.arrLisr[0];
+			newObj.arrLisr[1] = obj.arrLisr[1];
+			newObj.arrLisr[2] = obj.arrLisr[2];
+			newObj.addobj = {};
+			newObj.addobj.age = obj.addobj.age;
+			newObj.addobj.sex = obj.addobj.sex;
+			// 这里对于函数方法基本不需要进行深度克隆,毕竟函数本身特点就是为了代码复用,大部分不需要深度克隆了.
+			newObj.fun = obj.fun;
+			// 如果函数方法非要发生改变那么如下代码:
+			// newObj.fun = obj.fun.bind(newObj);      一般用不到
+			
+			
+			
+			
+			// 通过下面的代码进行测试,可以得出我们现在newObj对象和obj对象没有任何的数值关联影响,已经达到了深拷贝的需求功能的实现. 
+			console.log(obj);
+			console.log(newObj);
+			newObj.name = "修改性名"
+			newObj.arrLisr[0] = 100;
+			newObj.addobj.sex = "女";
+			console.log(obj);
+			console.log(newObj);
+			
+			
+			
+			
+			
+			
+			
+			 
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

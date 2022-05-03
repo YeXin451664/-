@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 递归深拷贝实现练习  -- 根据我们上个练习基础代码分析进行实现递归深拷贝功能
+			// 需要深拷贝的对象
+			let obj = {
+				// 基本数类型
+				name:"性名",
+				// 数组
+				arrLisr:[1,2,3],
+				// 对象
+				addobj:{
+					age:19,
+					sex:"男"
+				},
+				// 函数
+				fun:function(){
+					console.log("函数")
+				}
+			}
+			// 需要深拷贝的数组
+			let arr = [true,{name:"数组"},[1,2]];
+			function fun(a){
+				// 返回值变量
+				let fan;
+				// 返回值式对象还是数值呢? -- 如果我们需要拷贝的是对象,那么我们拷贝完返回的也是对象,如果是数组,那么拷贝完返回的也是数组.
+				(a instanceof Array) ?   fan = []  : fan = {};
+				// console.log(fan);
+				// 求出需要拷贝的对象的属性名称
+				let shuxingS =  Object.keys(a);
+				for(let i = 0 ; i < shuxingS.length ; i++){
+					let index = shuxingS[i];
+					// 如果它里面下一层还有引用数据(指的是数值和对象数据类型)的话继续进行调用最外层函数进行遍历复制
+					if(a[index] instanceof Array  ||  a[index] instanceof Object){
+						// 这一步很关键  如果写成 fun(a[index]) 
+						fan[index]  =  fun(a[index]);
+					}else{	
+						fan[index] = a[index];
+					}
+					
+				}
+				return fan 
+			}
+			// 测试结果:
+			let fan = fun(arr)
+			fan[1].name = false;
+			console.log(arr);
+			console.log(fan);
+			
+			
+		</script>
+	</body>
+</html>
